@@ -19,8 +19,8 @@
             --border: rgba(255, 255, 255, 0.08);
             --text: #e8e8ed;
             --text-dim: rgba(255, 255, 255, 0.45);
-            --accent: #6366f1;
-            --accent-glow: rgba(99, 102, 241, 0.15);
+            --accent: #d4882a;
+            --accent-glow: rgba(212, 136, 42, 0.15);
         }
 
         html {
@@ -141,7 +141,7 @@
 
         .hero h1 em {
             font-style: normal;
-            background: linear-gradient(135deg, #818cf8, #6366f1, #4f46e5);
+            background: linear-gradient(135deg, #e8a84c, #d4882a, #b86e1a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -179,7 +179,7 @@
         }
 
         .btn-primary:hover {
-            background: #4f46e5;
+            background: #b86e1a;
             box-shadow: 0 0 30px var(--accent-glow);
         }
 
@@ -299,8 +299,8 @@
         }
 
         .research-card:hover {
-            border-color: rgba(99, 102, 241, 0.2);
-            background: rgba(99, 102, 241, 0.03);
+            border-color: rgba(212, 136, 42, 0.2);
+            background: rgba(212, 136, 42, 0.03);
         }
 
         .card-number {
@@ -533,14 +533,14 @@
         <div class="section-inner fade-in">
             <h2 class="section-title">Let's talk</h2>
             <p>We're in stealth. If our research interests you, reach out.</p>
-            <a href="mailto:hello@anathor.ai" class="btn-primary">hello@anathor.ai</a>
+            <a href="mailto:aidan@cmu.edu" class="btn-primary">aidan@cmu.edu</a>
         </div>
     </section>
 
     <footer>
         <div class="footer-left">anathor &copy; 2026</div>
         <div class="footer-right">
-            <a href="mailto:hello@anathor.ai">Contact</a>
+            <a href="mailto:aidan@cmu.edu">Contact</a>
         </div>
     </footer>
 
@@ -583,7 +583,7 @@
                 const alpha = 0.02 + 0.03 * Math.sin(i / lineCount * Math.PI);
 
                 ctx.beginPath();
-                ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`;
+                ctx.strokeStyle = `rgba(212, 136, 42, ${alpha})`;
                 ctx.lineWidth = 1;
 
                 for (let j = 0; j <= pointCount; j++) {
