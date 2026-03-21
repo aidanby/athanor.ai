@@ -638,7 +638,7 @@
     <div class="hero">
         <div class="stealth-badge">Stealth '26</div>
         <div class="hero-label">AI Research</div>
-        <h1>Machines that <em class="decode-text" data-text="teach themselves">teach themselves</em></h1>
+        <h1>Machines that <em>teach themselves</em></h1>
         <p>We're building the foundations for long-horizon learning and recursive self-improvement.</p>
         <div class="hero-buttons">
             <a href="#research" class="btn-primary">Our research</a>
@@ -673,23 +673,23 @@
     <section id="research">
         <div class="section-inner fade-in">
             <div class="section-label">What we work on</div>
-            <h2 class="section-title decode-text" data-text="Core research areas">Core research areas</h2>
+            <h2 class="section-title">Core research areas</h2>
             <p class="section-desc">We pursue fundamental questions about how intelligent systems can continuously improve through interaction with their environment.</p>
 
             <div class="research-grid">
                 <div class="research-card fade-in">
-                    <div class="card-number" data-target="01">00</div>
-                    <div class="card-title decode-text" data-text="Long-Horizon Learning">Long-Horizon Learning</div>
+                    <div class="card-number">01</div>
+                    <div class="card-title">Long-Horizon Learning</div>
                     <div class="card-desc">Training agents that develop capabilities over extended interaction sequences, building compounding understanding through practice and feedback.</div>
                 </div>
                 <div class="research-card fade-in">
-                    <div class="card-number" data-target="02">00</div>
-                    <div class="card-title decode-text" data-text="Recursive Self-Improvement">Recursive Self-Improvement</div>
+                    <div class="card-number">02</div>
+                    <div class="card-title">Recursive Self-Improvement</div>
                     <div class="card-desc">Systems that identify their own weaknesses, generate targeted training, and iteratively enhance their capabilities without human intervention.</div>
                 </div>
                 <div class="research-card fade-in">
-                    <div class="card-number" data-target="03">00</div>
-                    <div class="card-title decode-text" data-text="Robust Evaluation">Robust Evaluation</div>
+                    <div class="card-number">03</div>
+                    <div class="card-title">Robust Evaluation</div>
                     <div class="card-desc">Ensuring that measured progress reflects genuine capability gains, not artifacts of the evaluation process itself.</div>
                 </div>
             </div>
@@ -864,82 +864,16 @@
 
         draw();
 
-        // ── Text decode/scramble effect ──
-        const chars = '01!@#$%&*<>{}[]~';
-
-        function decodeText(element) {
-            const original = element.getAttribute('data-text') || element.textContent;
-            const length = original.length;
-            let iteration = 0;
-
-            const interval = setInterval(() => {
-                element.textContent = original.split('').map((char, i) => {
-                    if (char === ' ') return ' ';
-                    if (i < iteration) return original[i];
-                    return chars[Math.floor(Math.random() * chars.length)];
-                }).join('');
-
-                iteration += 1 / 2;
-
-                if (iteration >= length) {
-                    element.textContent = original;
-                    clearInterval(interval);
-                }
-            }, 30);
-        }
-
-        // ── Card number count-up animation ──
-        function animateNumber(element) {
-            const target = element.getAttribute('data-target');
-            const targetNum = parseInt(target);
-            let current = 0;
-            const steps = 15;
-            let step = 0;
-
-            const interval = setInterval(() => {
-                step++;
-                // Scramble through random numbers
-                if (step < steps) {
-                    current = Math.floor(Math.random() * 10);
-                    element.textContent = '0' + current;
-                } else {
-                    element.textContent = target;
-                    clearInterval(interval);
-                }
-            }, 50);
-        }
-
         // ── Scroll-triggered animations ──
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-
-                    // Trigger decode on titles
-                    const decodeEls = entry.target.querySelectorAll('.decode-text');
-                    decodeEls.forEach((el, i) => {
-                        setTimeout(() => decodeText(el), i * 200);
-                    });
-
-                    // Trigger number count-up
-                    const numberEls = entry.target.querySelectorAll('.card-number[data-target]');
-                    numberEls.forEach((el, i) => {
-                        setTimeout(() => animateNumber(el), i * 150 + 300);
-                    });
                 }
             });
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // ── Hero decode on load ──
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.querySelectorAll('.hero .decode-text').forEach((el, i) => {
-                    setTimeout(() => decodeText(el), i * 400 + 800);
-                });
-            }, 400);
-        });
 
         // ── Smooth scroll ──
         document.querySelectorAll('a[href^="#"]').forEach(a => {
