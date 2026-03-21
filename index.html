@@ -3,7 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anathor</title>
+    <title>Anathor — AI Research</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,10 80,85 20,85' fill='%23d4882a' opacity='0.9'/><rect x='30' y='78' width='40' height='10' rx='2' fill='%23e8e8ed'/></svg>">
+
+    <!-- OpenGraph / Social -->
+    <meta property="og:title" content="Anathor — AI Research">
+    <meta property="og:description" content="Building the foundations for long-horizon learning and recursive self-improvement.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aidanby.github.io/anathor.ai/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Anathor — AI Research">
+    <meta name="twitter:description" content="Building the foundations for long-horizon learning and recursive self-improvement.">
+    <meta name="description" content="Anathor is an AI research lab building the foundations for long-horizon learning and recursive self-improvement.">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
@@ -20,6 +34,8 @@
             --text: #e8e8ed;
             --text-dim: rgba(255, 255, 255, 0.45);
             --accent: #d4882a;
+            --accent-light: #e8a84c;
+            --accent-dark: #b86e1a;
             --accent-glow: rgba(212, 136, 42, 0.15);
         }
 
@@ -65,10 +81,18 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
             font-size: 1.25rem;
             font-weight: 600;
             letter-spacing: -0.02em;
             color: var(--text);
+        }
+
+        .logo svg {
+            width: 22px;
+            height: 22px;
         }
 
         .nav-links {
@@ -115,6 +139,38 @@
             align-items: center;
             text-align: center;
             padding: 8rem 2rem 6rem;
+        }
+
+        .stealth-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 1rem;
+            border: 1px solid rgba(212, 136, 42, 0.25);
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: rgba(212, 136, 42, 0.06);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.15s;
+        }
+
+        .stealth-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
         }
 
         .hero-label {
@@ -202,10 +258,24 @@
         }
 
         /* Backers */
-        .backers {
+        .backers-wrapper {
             margin-top: 5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
             opacity: 0;
             animation: fadeUp 0.8s ease forwards 1s;
+        }
+
+        .backers-section {
+            text-align: center;
+        }
+
+        .backers-separator {
+            width: 40px;
+            height: 1px;
+            background: var(--border);
         }
 
         .backers-label {
@@ -214,7 +284,7 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--text-dim);
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
         }
 
         .backers-logos {
@@ -226,21 +296,27 @@
         }
 
         .backer-name {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 400;
             color: rgba(255, 255, 255, 0.5);
             letter-spacing: 0.02em;
+            transition: color 0.3s;
+        }
+
+        .backer-name:hover {
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .backer-name.tba {
             font-style: italic;
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.25);
         }
 
-        .advisors {
-            margin-top: 2.5rem;
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards 1.2s;
+        .backer-dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
         }
 
         /* Sections */
@@ -298,9 +374,25 @@
             transition: all 0.4s;
         }
 
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 136, 42, 0), transparent);
+            transition: all 0.4s;
+        }
+
+        .research-card:hover::before {
+            background: linear-gradient(90deg, transparent, rgba(212, 136, 42, 0.4), transparent);
+        }
+
         .research-card:hover {
             border-color: rgba(212, 136, 42, 0.2);
             background: rgba(212, 136, 42, 0.03);
+            transform: translateY(-2px);
         }
 
         .card-number {
@@ -310,6 +402,7 @@
             color: var(--accent);
             margin-bottom: 1.5rem;
             font-variant-numeric: tabular-nums;
+            font-family: 'Courier New', monospace;
         }
 
         .card-title {
@@ -416,6 +509,11 @@
             }
         }
 
+        /* Decode text effect */
+        .decode-text {
+            display: inline;
+        }
+
         /* Mobile */
         @media (max-width: 768px) {
             nav {
@@ -450,6 +548,10 @@
                 text-align: center;
                 padding: 2rem 1.5rem;
             }
+
+            .backers-logos {
+                gap: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -457,7 +559,13 @@
     <canvas id="wave-canvas"></canvas>
 
     <nav>
-        <div class="logo">anathor</div>
+        <div class="logo">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="50,8 82,72 18,72" fill="#d4882a" opacity="0.9"/>
+                <rect x="15" y="76" width="70" height="12" rx="3" fill="#e8e8ed" opacity="0.8"/>
+            </svg>
+            anathor
+        </div>
         <div class="nav-links">
             <a href="#research">Research</a>
             <a href="#vision">Vision</a>
@@ -466,27 +574,34 @@
     </nav>
 
     <div class="hero">
+        <div class="stealth-badge">Stealth '26</div>
         <div class="hero-label">AI Research</div>
-        <h1>Machines that <em>teach themselves</em></h1>
+        <h1>Machines that <em class="decode-text" data-text="teach themselves">teach themselves</em></h1>
         <p>We're building the foundations for long-horizon learning and recursive self-improvement.</p>
         <div class="hero-buttons">
             <a href="#research" class="btn-primary">Our research</a>
             <a href="#contact" class="btn-secondary">Get in touch</a>
         </div>
 
-        <div class="backers">
-            <div class="backers-label">Backed by</div>
-            <div class="backers-logos">
-                <span class="backer-name tba">To be announced</span>
+        <div class="backers-wrapper">
+            <div class="backers-section">
+                <div class="backers-label">Backed by</div>
+                <div class="backers-logos">
+                    <span class="backer-name tba">To be announced</span>
+                </div>
             </div>
-        </div>
 
-        <div class="advisors">
-            <div class="backers-label">With angels and advisors from</div>
-            <div class="backers-logos">
-                <span class="backer-name">Handshake.ai</span>
-                <span class="backer-name">Amazon AWS</span>
-                <span class="backer-name">Carnegie Mellon University</span>
+            <div class="backers-separator"></div>
+
+            <div class="backers-section">
+                <div class="backers-label">With angels and advisors from</div>
+                <div class="backers-logos">
+                    <span class="backer-name">Handshake.ai</span>
+                    <span class="backer-dot"></span>
+                    <span class="backer-name">Amazon AWS</span>
+                    <span class="backer-dot"></span>
+                    <span class="backer-name">Carnegie Mellon University</span>
+                </div>
             </div>
         </div>
     </div>
@@ -496,23 +611,23 @@
     <section id="research">
         <div class="section-inner fade-in">
             <div class="section-label">What we work on</div>
-            <h2 class="section-title">Core research areas</h2>
+            <h2 class="section-title decode-text" data-text="Core research areas">Core research areas</h2>
             <p class="section-desc">We pursue fundamental questions about how intelligent systems can continuously improve through interaction with their environment.</p>
 
             <div class="research-grid">
                 <div class="research-card fade-in">
-                    <div class="card-number">01</div>
-                    <div class="card-title">Long-Horizon Learning</div>
+                    <div class="card-number" data-target="01">00</div>
+                    <div class="card-title decode-text" data-text="Long-Horizon Learning">Long-Horizon Learning</div>
                     <div class="card-desc">Training agents that develop capabilities over extended interaction sequences, building compounding understanding through practice and feedback.</div>
                 </div>
                 <div class="research-card fade-in">
-                    <div class="card-number">02</div>
-                    <div class="card-title">Recursive Self-Improvement</div>
+                    <div class="card-number" data-target="02">00</div>
+                    <div class="card-title decode-text" data-text="Recursive Self-Improvement">Recursive Self-Improvement</div>
                     <div class="card-desc">Systems that identify their own weaknesses, generate targeted training, and iteratively enhance their capabilities without human intervention.</div>
                 </div>
                 <div class="research-card fade-in">
-                    <div class="card-number">03</div>
-                    <div class="card-title">Robust Evaluation</div>
+                    <div class="card-number" data-target="03">00</div>
+                    <div class="card-title decode-text" data-text="Robust Evaluation">Robust Evaluation</div>
                     <div class="card-desc">Ensuring that measured progress reflects genuine capability gains, not artifacts of the evaluation process itself.</div>
                 </div>
             </div>
@@ -546,7 +661,7 @@
     </footer>
 
     <script>
-        // Wave canvas animation
+        // ── Wave canvas + ember particles ──
         const canvas = document.getElementById('wave-canvas');
         const ctx = canvas.getContext('2d');
         let mouseX = 0, mouseY = 0;
@@ -564,11 +679,37 @@
             mouseY = e.clientY;
         });
 
-        // Simple noise function
         function noise(x, y, t) {
             return Math.sin(x * 0.01 + t) * Math.cos(y * 0.008 + t * 0.7) * 0.5 +
                    Math.sin(x * 0.005 - t * 0.5) * Math.cos(y * 0.012 + t * 0.3) * 0.3 +
                    Math.sin((x + y) * 0.003 + t * 0.2) * 0.2;
+        }
+
+        // Ember particles
+        const embers = [];
+        const EMBER_COUNT = 40;
+
+        for (let i = 0; i < EMBER_COUNT; i++) {
+            embers.push({
+                x: Math.random() * 2000,
+                y: Math.random() * 2000,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: -Math.random() * 0.8 - 0.2,
+                size: Math.random() * 2 + 0.5,
+                alpha: Math.random() * 0.4 + 0.1,
+                life: Math.random(),
+                decay: Math.random() * 0.002 + 0.001
+            });
+        }
+
+        function resetEmber(e) {
+            e.x = Math.random() * width;
+            e.y = height * 0.5 + Math.random() * height * 0.4;
+            e.vx = (Math.random() - 0.5) * 0.3;
+            e.vy = -Math.random() * 0.8 - 0.2;
+            e.alpha = Math.random() * 0.4 + 0.1;
+            e.life = 1;
+            e.size = Math.random() * 2 + 0.5;
         }
 
         let time = 0;
@@ -576,6 +717,7 @@
         function draw() {
             ctx.clearRect(0, 0, width, height);
 
+            // Draw waves
             const lineCount = 35;
             const pointCount = 120;
 
@@ -604,24 +746,128 @@
                 ctx.stroke();
             }
 
+            // Draw embers
+            for (const e of embers) {
+                e.x += e.vx + Math.sin(time * 2 + e.x * 0.01) * 0.15;
+                e.y += e.vy;
+                e.life -= e.decay;
+
+                if (e.life <= 0 || e.y < -10) {
+                    resetEmber(e);
+                    continue;
+                }
+
+                const a = e.alpha * e.life;
+                const glow = e.size * 3;
+
+                // Glow
+                const grad = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, glow);
+                grad.addColorStop(0, `rgba(232, 168, 76, ${a * 0.6})`);
+                grad.addColorStop(1, `rgba(212, 136, 42, 0)`);
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(e.x, e.y, glow, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Core
+                ctx.fillStyle = `rgba(255, 200, 120, ${a})`;
+                ctx.beginPath();
+                ctx.arc(e.x, e.y, e.size * 0.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
             time += 0.008;
             requestAnimationFrame(draw);
         }
 
         draw();
 
-        // Scroll-triggered fade-in
+        // ── Text decode/scramble effect ──
+        const chars = '01!@#$%&*<>{}[]~';
+
+        function decodeText(element) {
+            const original = element.getAttribute('data-text') || element.textContent;
+            const length = original.length;
+            let iteration = 0;
+
+            const interval = setInterval(() => {
+                element.textContent = original.split('').map((char, i) => {
+                    if (char === ' ') return ' ';
+                    if (i < iteration) return original[i];
+                    return chars[Math.floor(Math.random() * chars.length)];
+                }).join('');
+
+                iteration += 1 / 2;
+
+                if (iteration >= length) {
+                    element.textContent = original;
+                    clearInterval(interval);
+                }
+            }, 30);
+        }
+
+        // ── Card number count-up animation ──
+        function animateNumber(element) {
+            const target = element.getAttribute('data-target');
+            const targetNum = parseInt(target);
+            let current = 0;
+            const steps = 15;
+            let step = 0;
+
+            const interval = setInterval(() => {
+                step++;
+                // Scramble through random numbers
+                if (step < steps) {
+                    current = Math.floor(Math.random() * 10);
+                    element.textContent = '0' + current;
+                } else {
+                    element.textContent = target;
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+
+        // ── Scroll-triggered animations ──
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+
+                    // Trigger decode on titles
+                    const decodeEls = entry.target.querySelectorAll('.decode-text');
+                    decodeEls.forEach((el, i) => {
+                        setTimeout(() => decodeText(el), i * 200);
+                    });
+
+                    // Trigger number count-up
+                    const numberEls = entry.target.querySelectorAll('.card-number[data-target]');
+                    numberEls.forEach((el, i) => {
+                        setTimeout(() => animateNumber(el), i * 150 + 300);
+                    });
                 }
             });
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Smooth scroll for anchor links
+        // ── Hero decode on load ──
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.hero .decode-text').forEach((el, i) => {
+                    setTimeout(() => decodeText(el), i * 400 + 800);
+                });
+            }, 400);
+        });
+
+        // ── Card title decode on hover ──
+        document.querySelectorAll('.research-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const title = card.querySelector('.card-title.decode-text');
+                if (title) decodeText(title);
+            });
+        });
+
+        // ── Smooth scroll ──
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', (e) => {
                 e.preventDefault();
