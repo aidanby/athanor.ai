@@ -201,6 +201,48 @@
             border-color: rgba(255, 255, 255, 0.15);
         }
 
+        /* Backers */
+        .backers {
+            margin-top: 5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 1s;
+        }
+
+        .backers-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 1.25rem;
+        }
+
+        .backers-logos {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .backer-name {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.02em;
+        }
+
+        .backer-name.tba {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .advisors {
+            margin-top: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 1.2s;
+        }
+
         /* Sections */
         section {
             position: relative;
@@ -430,6 +472,21 @@
         <div class="hero-buttons">
             <a href="#research" class="btn-primary">Our research</a>
             <a href="#contact" class="btn-secondary">Get in touch</a>
+        </div>
+
+        <div class="backers">
+            <div class="backers-label">Backed by</div>
+            <div class="backers-logos">
+                <span class="backer-name tba">To be announced</span>
+            </div>
+        </div>
+
+        <div class="advisors">
+            <div class="backers-label">With angels and advisors from</div>
+            <div class="backers-logos">
+                <span class="backer-name">Handshake.ai</span>
+                <span class="backer-name">Amazon AWS</span>
+            </div>
         </div>
     </div>
 
